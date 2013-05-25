@@ -36,6 +36,7 @@ import java.util.LinkedList;
 
 
 /**
+ * TODO: To be replaced by code in IabHelper and StoreController (with the IAB v3 code)
  * This class sends messages to Android Market on behalf of the application by
  * connecting (binding) to the MarketBillingService. The application
  * creates an instance of this class and invokes billing requests through this service.

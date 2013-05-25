@@ -30,7 +30,7 @@ Check out our [Wiki] (https://github.com/soomla/android-store/wiki) for more inf
  `git clone git@github.com:soomla/android-store.git`
 
 2. Make the following changes to your AndroidManifest.xml:
-
+  
   Add `SoomlaApp` as the main Application by placing it in the `application` tag:
 
     ```xml
@@ -44,7 +44,7 @@ Check out our [Wiki] (https://github.com/soomla/android-store/wiki) for more inf
     <uses-permission android:name="com.android.vending.BILLING" />
     ```
 
-  Add the following code into your `application` element:
+  Add the following code into your `application` element (Not required for Google's IAB v3 which is separate from SOOMLA's modelV3):
 
     ```xml
     <service android:name="com.soomla.billing.BillingService" />
@@ -86,6 +86,8 @@ Check out our [Wiki] (https://github.com/soomla/android-store/wiki) for more inf
     StoreController.getInstance().storeClosing();
     ```
 
+  Once _storeOpening_ has been called, everything required for purchasing items off stores will be initialized.
+
 And that's it ! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
 
 
@@ -113,7 +115,9 @@ VirtualCurrencyPack TEN_COINS_PACK = new VirtualCurrencyPack(
         new PurchaseWithMarket("com.soomla.ten_coin_pack", 1.99));
 ```
  
-Now you can use _StoreInventory_ to buy your new VirtualCurrencyPack:
+ Terminology: "10_coins" is the ITEM ID (Internal to SOOMLA). "com.soomla.ten_coin_pack" is the PRODUCT ID (defined on the Google Play Developer Console).
+ 
+ Now you can use _StoreInventory_ to buy your new VirtualCurrencyPack:
 
 ```Java
 StoreInventory.buy(TEN_COINS_PACK.getItemId());

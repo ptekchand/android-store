@@ -18,11 +18,13 @@
 package com.soomla.billing;
 
 /**
+ * TODO: To be replaced by code in IabHelper and StoreController (with the IAB v3 code)
  * This class holds global constants that are used throughout the application
  * to support in-app billing.
  */
 public class Consts {
     // The response codes for a request, defined by Android Market.
+	// Each enum has the prefix BILLING_ in IAB v3
     public enum ResponseCode {
         RESULT_OK,
         RESULT_USER_CANCELED,
@@ -30,7 +32,9 @@ public class Consts {
         RESULT_BILLING_UNAVAILABLE,
         RESULT_ITEM_UNAVAILABLE,
         RESULT_DEVELOPER_ERROR,
-        RESULT_ERROR;
+        RESULT_ERROR,
+        RESPONSE_RESULT_ITEM_ALREADY_OWNED,
+        RESPONSE_RESULT_ITEM_NOT_OWNED;
 
         // Converts from an ordinal value to the ResponseCode
         public static ResponseCode valueOf(int index) {

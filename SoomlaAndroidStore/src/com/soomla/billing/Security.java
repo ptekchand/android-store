@@ -43,6 +43,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
+ * TODO: To be replaced by util.Security (with the IAB v3 code)
  * Security-related methods. For a secure implementation, all of this code
  * should be implemented on a server that communicates with the
  * application on the device. If you

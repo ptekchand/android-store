@@ -24,6 +24,7 @@ import android.util.Log;
 import com.soomla.store.StoreUtils;
 
 /**
+ * TODO: To be replaced by code in IabHelper and StoreController (with the IAB v3 code)
  * This class implements the broadcast receiver for in-app billing. All asynchronous messages from
  * Android Market come to this app through this receiver. This class forwards all
  * messages to the {@link BillingService}, which can start background threads,

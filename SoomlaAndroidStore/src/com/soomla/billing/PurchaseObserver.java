@@ -33,6 +33,7 @@ import com.soomla.store.StoreUtils;
 import java.lang.reflect.Method;
 
 /**
+ * TODO: To be replaced by code in IabHelper and StoreController (with the IAB v3 code)
  * An interface for observing changes related to purchases. {@link com.soomla.store.StoreController}
  * extends this class and registers an instance of that derived class with
  * {@link ResponseHandler}.

@@ -28,6 +28,7 @@ import com.soomla.billing.Consts.ResponseCode;
 import com.soomla.store.StoreUtils;
 
 /**
+ * TODO: To be replaced by code in IabHelper and StoreController (with the IAB v3 code)
  * This class contains the methods that handle responses from Android Market.
  * This class updates the UI through the registered PurchaseObserver.
  */
