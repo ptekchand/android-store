@@ -44,7 +44,7 @@ Check out our [Wiki] (https://github.com/soomla/android-store/wiki) for more inf
     <uses-permission android:name="com.android.vending.BILLING" />
     ```
 
-  Add the following code into your `application` element (Not required for Google's IAB v3 which is separate from SOOMLA's modelV3):
+  Add the following code into your `application` element (**Not required** for Google's IAB v3 which is separate from SOOMLA's modelV3):
 
     ```xml
     <service android:name="com.soomla.billing.BillingService" />
@@ -88,7 +88,31 @@ Check out our [Wiki] (https://github.com/soomla/android-store/wiki) for more inf
 
   Once _storeOpening_ has been called, everything required for purchasing items off stores will be initialized.
 
-And that's it ! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
+6. Finally, you need to implement _onActivityResult_ in the activity which calls _storeOpening_ and allow _StoreController_ to handle the result. If it returns false, you may continue processing the result as it may be for some other result you're expecting in _onActivityResult_:
+
+  When you show the store call:
+
+    ```Java
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "onActivityResult(" + requestCode + "," + resultCode + "," + data);
+
+        // Pass on the activity result to the helper for handling
+        if (!StoreController.getInstance().handleActivityResult(requestCode, resultCode, data)) {
+            // Result not handled by StoreController/IabHelper, so handle it yourself
+			// (here's where you'd perform any handling of activity results not related 
+			// to in-app billing.
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+        else {
+            Log.d(TAG, "onActivityResult handled by StoreController/IabHelper.");
+        }
+    }
+    ```
+  
+  See the _StorePacksActivity_ in the _SoomlaAndroidExample_ project.
+  
+  And that's it ! You have storage and in-app purchasing capabilities... ALL-IN-ONE.
 
 
 ## What's next? In App Purchasing.

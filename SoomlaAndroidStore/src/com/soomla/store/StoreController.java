@@ -17,6 +17,7 @@ package com.soomla.store;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import com.soomla.billing.BillingService;
 import com.soomla.billing.Consts;
@@ -547,8 +548,28 @@ public class StoreController extends PurchaseObserver {
     }
 
     /**
+     * Handles an activity result that's part of the purchase flow in in-app billing.
+     * This method MUST be called from the UI thread of the Activity.
+     * {@link com.soomla.billing.util.IabHelper@handleActivityResult}
      * Activities calling storeOpening need to override onActivityResult
-     * and call handleActivityResult on it.
+     * and call handleActivityResult on this.
+     * 
+     * @param requestCode The requestCode as you received it.
+     * @param resultCode The resultCode as you received it.
+     * @param data The data (Intent) as you received it.
+     * @return Returns true if the result was related to a purchase flow and was handled;
+     *     false if the result was not related to a purchase, in which case you should
+     *     handle it normally.
+     */
+    public boolean handleActivityResult(int requestCode, int resultCode, Intent data) {
+    	if(mIabHelper!=null /*&& mStoreOpen*/) {
+    		return mIabHelper.handleActivityResult(requestCode, resultCode, data);
+    	}
+    	return false;
+    }
+
+    /**
+     * In case activities need to access the helper.
      * @return
      */
     public IabHelper getIabHelper() {

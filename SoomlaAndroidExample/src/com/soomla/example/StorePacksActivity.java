@@ -3,11 +3,14 @@ package com.soomla.example;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.soomla.store.BusProvider;
+import com.soomla.store.StoreController;
+import com.soomla.store.StoreUtils;
 import com.soomla.store.data.StorageManager;
 import com.soomla.store.data.StoreInfo;
 import com.soomla.store.domain.NonConsumableItem;
@@ -124,6 +127,23 @@ public class StorePacksActivity extends Activity {
         /* fetching the currency balance and placing it in the balance label */
         TextView muffinsBalance = (TextView)findViewById(R.id.balance);
         muffinsBalance.setText("" + currencyBalanceChangedEvent.getBalance());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    	final String TAG = "SOOMLA StorePacksActivity";
+    	StoreUtils.LogDebug(TAG, "onActivityResult(" + requestCode + "," + resultCode + "," + data);
+
+        // Pass on the activity result to the helper for handling
+        if (!StoreController.getInstance().handleActivityResult(requestCode, resultCode, data)) {
+            // Result not handled by StoreController/IabHelper, so handle it yourself
+			// (here's where you'd perform any handling of activity results not related 
+			// to in-app billing.
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+        else {
+        	StoreUtils.LogDebug(TAG, "onActivityResult handled by StoreController/IabHelper.");
+        }
     }
 
     private class StoreAdapter extends BaseAdapter {
